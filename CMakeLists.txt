@@ -17,11 +17,9 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	#* Cmake, language and compiler options *#
 	#****************************************#
 	##* [Optional]:
-	set(CMAKE_C_COMPILER "gcc")
-	set(CMAKE_CXX_COMPILER "g++")
-	set(CMAKE_CXX_STANDARD 17)
-	set(CMAKE_CXX_STANDARD_REQUIRED ON)
-	set(CMAKE_CXX_EXTENSIONS OFF)
+	#set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+	#set(CMAKE_CXX_EXTENSIONS OFF)
 
 	#* project compilation flags
 	add_compile_options(
@@ -30,15 +28,15 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 		-Wall #* all warnings
 		-Wextra #* more warnings
 		-Wpedantic #* more warnings
-		-D__USE_SINGLE_PRECISION__ #* use single precision floats over double precision
+		#-D__USE_SINGLE_PRECISION__ #* use single precision floats over double precision
 		#-fno-math-errno #* disable errno 
 		#* [Optional]: for embedded systems the following flags may be enabled
-		-fno-rtti #* disable RTTI 
-		-fno-exceptions #* disable exceptions  
-		-fno-non-call-exceptions  
-		-fno-use-cxa-atexit #* disable destructors 
-		-fno-common #* declare globals once 
-		-ffreestanding #* standard library may be unavailable 
+		#-fno-rtti #* disable RTTI 
+		#-fno-exceptions #* disable exceptions  
+		#-fno-non-call-exceptions  
+		#-fno-use-cxa-atexit #* disable destructors 
+		#-fno-common #* declare globals once 
+		#-ffreestanding #* standard library may be unavailable 
 	)
 
 	#* force build type if CMake Tools fail to do so, change "Debug" to "Release" for release
