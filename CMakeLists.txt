@@ -15,7 +15,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
 
 	#****************************************#
-	#* Cmake, language and compiler options *#
+	#* CMake, language and compiler options *#
 	#****************************************#
 	##* [Optional]:
 	#set(CMAKE_CXX_STANDARD 17)
