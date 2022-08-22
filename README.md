@@ -1,4 +1,4 @@
-# matrix_wr
+# matrix_rw
 Simple header-only C++ library to write/read matrices to/from files. This library is used for testing and verification using MATLAB in my other projects.
 
 # Installation
