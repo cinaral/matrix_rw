@@ -46,8 +46,8 @@ main()
 	real_t max_error = 0.;
 
 	for (uint_t i = 0; i < n_dim * m_dim; ++i) {
-
 		real_t error = std::abs(in_arr[i] - out_arr[i]);
+
 		if (error > max_error) {
 			max_error = error;
 		}
