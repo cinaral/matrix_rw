@@ -3,15 +3,16 @@
 #***********#
 cmake_minimum_required(VERSION 3.13)
 
-set(MATRIX_RW_VERSION 1.0.0)
+set(matrix_rw_VERSION 1.0.0)
 
-project(matrix_rw VERSION ${MATRIX_RW_VERSION} LANGUAGES CXX)
+project(matrix_rw VERSION ${matrix_rw_VERSION} LANGUAGES CXX)
 
 #* only if we're in the root in order to not populate FetchContent()
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	option(FORCE_BUILD_TYPE "Forces build type" OFF)
 	option(SET_CORE_COUNT "Sets number of cores used in compilation" ON)
 	option(BUILD_TESTS "Build tests" ON)
+
 
 	#****************************************#
 	#* Cmake, language and compiler options *#
@@ -29,14 +30,6 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 		-Wextra #* more warnings
 		-Wpedantic #* more warnings
 		#-D__USE_SINGLE_PRECISION__ #* use single precision floats over double precision
-		#-fno-math-errno #* disable errno 
-		#* [Optional]: for embedded systems the following flags may be enabled
-		#-fno-rtti #* disable RTTI 
-		#-fno-exceptions #* disable exceptions  
-		#-fno-non-call-exceptions  
-		#-fno-use-cxa-atexit #* disable destructors 
-		#-fno-common #* declare globals once 
-		#-ffreestanding #* standard library may be unavailable 
 	)
 
 	#* force build type if CMake Tools fail to do so, change "Debug" to "Release" for release
@@ -51,26 +44,12 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
 	#* where to look for the project header and source files
 	set(INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
-	set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
 	#* set up directories for binary, library and data files 
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 	file(MAKE_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/dat)
-
-	#* set the number of cores for compilation
-	if(SET_CORE_COUNT)
-		include(ProcessorCount)
-		ProcessorCount(N)
-
-		if(NOT N EQUAL 0)
-			set(CTEST_BUILD_FLAGS -j${N})
-			set(ctest_test_args ${ctest_test_args} PARALLEL_LEVEL ${N})
-		endif()
-		message("> Number of cores set to ${N}")
-	endif()
-
+	
 	
 	#***********# 
 	#* Testing *#
@@ -97,6 +76,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 					WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 		endforeach(ELEMENT ${TEST_NAMES})
 	endif()
+
 
 	#************************#
 	#* Packaged source code *#
