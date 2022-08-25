@@ -1,7 +1,6 @@
 #ifndef MATRIX_RW_HPP_CINARAL_220814_17176
 #define MATRIX_RW_HPP_CINARAL_220814_17176
 
-#include "types.hpp"
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -11,6 +10,13 @@
 
 namespace matrix_rw
 {
+
+using uint_t = unsigned long long int;
+#ifdef __USE_SINGLE_PRECISION__
+using real_t = float;
+#else
+using real_t = double;
+#endif
 
 const uint_t precision = std::numeric_limits<real_t>::digits10 + 1;
 const std::string data_dir = "../../dat";
@@ -81,6 +87,6 @@ read(const std::string file_name, real_t matrix[])
 	file.close();
 }
 
-} // namespace matrix_io
+} // namespace matrix_rw
 
 #endif

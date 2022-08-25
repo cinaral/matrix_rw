@@ -1,5 +1,8 @@
 #include "matrix_rw.hpp"
 
+using uint_t = matrix_rw::uint_t;
+using real_t = matrix_rw::real_t;
+
 //********
 //* setup
 //********
