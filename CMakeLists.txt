@@ -69,6 +69,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	#* Packaged source code *#
 	#************************#
 	set(PACKAGE_FILES 
+		include/${PROJECT_NAME}/* 
 		include/${PROJECT_NAME}.hpp 
 		CMakeLists.txt 
 		LICENSE
