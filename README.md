@@ -14,7 +14,7 @@ set(matrix_rw_INCLUDE_DIR ${matrix_rw_SOURCE_DIR}/include)
 
 Use the MATLAB test and CTest to test the library before using. 
 
-**WARNING:** Running the MATLAB test is required since library's intended use case is interfacing with MATLAB functions.
+**WARNING:** Running the MATLAB test is required since this library's intended use case is interfacing with MATLAB functions.
 
 # Usage:
 
