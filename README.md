@@ -12,7 +12,8 @@ FetchContent_MakeAvailable(matrix_rw)
 set(matrix_rw_INCLUDE_DIR ${matrix_rw_SOURCE_DIR}/include)
 ```
 
-Use CTest to test the library before using.
+Use the MATLAB test and CTest to test the library before using. 
+**WARNING:** Running the MATLAB test is required since library's intended use case is interfacing with MATLAB functions.
 
 # Usage:
 
@@ -26,7 +27,7 @@ matrix_rw::read<n_dim, m_dim>(file, matrix);
 matrix_rw::write<n_dim, m_dim>(file, matrix);
 ```
 
-See the [test](./test/test-matrix_rw.cpp) for details.
+See the [test](./test/test-matrix_rw.cpp) for an example.
 
 The input and output files are comma and newline delimited, and their extension is ```*.dat``` by default. The formatting is compatible with MATLAB's ```writematrix``` and ```readmatrix```. Each row in the file corresponds to a matrix row. The file should contain ```N``` lines and ```M``` comma-separated numbers in each line for a ```N``` by ```M``` matrix.
 ```MATLAB
