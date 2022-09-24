@@ -29,7 +29,7 @@
 			"command": "./scripts/clean_build.sh",
 			"options": {
 				"cwd": "${workspaceFolder}"
-			},
+			}
 		},
 		{
 			"label": "Clean build and configure",
