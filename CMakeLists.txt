@@ -69,7 +69,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	#* Packaged source code *#
 	#************************#
 	set(PACKAGE_FILES 
-		include/${PROJECT_NAME}/* 
+		include/${PROJECT_NAME}/ 
 		include/${PROJECT_NAME}.hpp 
 		CMakeLists.txt 
 		LICENSE
@@ -80,7 +80,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 		COMMAND ${CMAKE_COMMAND} -E tar c ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-src.zip --format=zip -- ${PACKAGE_FILES}
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		DEPENDS ${PACKAGE_FILES}
-	)
+	) 
 	add_custom_target(${PROJECT_NAME}_package DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-src.zip)
 
 endif()
