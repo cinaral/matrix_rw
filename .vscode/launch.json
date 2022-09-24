@@ -6,14 +6,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}\\build\\bin\\${fileBasenameNoExtension}.exe",
 			"cwd": "${workspaceFolder}\\build\\bin",
-			"preLaunchTask": "Build",
-			"setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-			]
+			//"preLaunchTask": "Build"
 		}
 	],
 	"version": "0.2.0"
