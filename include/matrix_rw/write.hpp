@@ -1,7 +1,7 @@
 #ifndef WRITE_HPP_CINARAL_220924_0019
 #define WRITE_HPP_CINARAL_220924_0019
 
-#include "matrix_rw/types.hpp"
+#include "types.hpp"
 #include <fstream>
 #include <iomanip>
 #include <iostream>

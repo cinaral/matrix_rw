@@ -1,7 +1,7 @@
 #ifndef READ_HPP_CINARAL_220924_0017
 #define READ_HPP_CINARAL_220924_0017
 
-#include "matrix_rw/types.hpp"
+#include "types.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
