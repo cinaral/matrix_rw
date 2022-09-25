@@ -25,7 +25,7 @@ in_arr = [m; m]./max(m, [], 'all') - 1/3;
 
 writematrix(in_arr, append(ref_dat_prefix, in_arr_fname), 'Delimiter', ',');
 
-disp('Created reference data.');
+disp(append('Created reference data for ', test_name));
 
 prev_pwd = pwd;
 cd(bin_dir);

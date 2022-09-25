@@ -31,25 +31,35 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	
 	#* where to look for the project header and source files
 	set(INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
+	set(TEST_DIR ${CMAKE_CURRENT_LIST_DIR}/test)
+
+	#* tests, examples, benchmarks to compile
+	set(TEST_NAMES
+		test-matrix_rw
+	)
+
+	#* files to package
+	set(PACKAGE_FILES 
+		include/${PROJECT_NAME}/ 
+		include/${PROJECT_NAME}.hpp 
+		CMakeLists.txt 
+		LICENSE
+	)
 
 	#* set up directories for binary, library, data and parameter files 
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 	file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dat)
 
 	#***********#
 	#* Testing *#
 	#***********#
 	if(BUILD_TESTS)
-		set(TEST_NAMES
-			test-matrix_rw
-		)
 		enable_testing()
 
 		foreach(ELEMENT ${TEST_NAMES})
 			add_executable(
 				${ELEMENT} 
-				test/${ELEMENT}.cpp						
+				${TEST_DIR}/${ELEMENT}.cpp						
 			)
 
 			target_include_directories(
@@ -68,13 +78,6 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	#************************#
 	#* Packaged source code *#
 	#************************#
-	set(PACKAGE_FILES 
-		include/${PROJECT_NAME}/ 
-		include/${PROJECT_NAME}.hpp 
-		CMakeLists.txt 
-		LICENSE
-	)
-
 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-src.zip
 		COMMAND ${CMAKE_COMMAND} -E tar c ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-src.zip --format=zip -- ${PACKAGE_FILES}
