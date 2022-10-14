@@ -34,9 +34,9 @@
 
 namespace matrix_rw
 {
-template <uint_t N_ROW, uint_t M_COL>
+template <Uint_T N_ROW, Uint_T M_COL>
 void
-read(const std::string file_name, real_t (&matrix)[N_ROW * M_COL])
+read(const std::string file_name, Real_T (&matrix)[N_ROW * M_COL])
 {
 	std::ifstream file;
 	file.open(file_name);
@@ -46,12 +46,12 @@ read(const std::string file_name, real_t (&matrix)[N_ROW * M_COL])
 		std::string entry;
 		size_t str_pos = 0;
 
-		for (uint_t i = 0; i < N_ROW; i++) {
+		for (Uint_T i = 0; i < N_ROW; i++) {
 			if (std::getline(file, line)) {
 				entry = line.substr(0, line.find(delimiter));
 
 				//* parse the line by splitting at the delimiters
-				for (uint_t j = 0; j < M_COL; j++) {
+				for (Uint_T j = 0; j < M_COL; j++) {
 					if ((str_pos = line.find(delimiter)) != std::string::npos) {
 						entry = line.substr(0, str_pos);
 						line.erase(0, str_pos + delimiter.length());

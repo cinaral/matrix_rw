@@ -31,11 +31,11 @@
 
 namespace matrix_rw
 {
-using uint_t = unsigned long long int;
+using Uint_T = unsigned long long int;
 #ifdef __USE_SINGLE_PRECISION__
-using real_t = float;
+using Real_T = float;
 #else
-using real_t = double;
+using Real_T = double;
 #endif
 
 constexpr std::string_view delimiter = ",";

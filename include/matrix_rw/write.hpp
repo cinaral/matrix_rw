@@ -36,20 +36,20 @@
 
 namespace matrix_rw
 {
-const uint_t precision = std::numeric_limits<real_t>::digits10 + 1;
+const Uint_T precision = std::numeric_limits<Real_T>::digits10 + 1;
 
-template <uint_t N_ROW, uint_t M_COL>
+template <Uint_T N_ROW, Uint_T M_COL>
 void
-write(const std::string file_name, const real_t (&matrix)[N_ROW * M_COL])
+write(const std::string file_name, const Real_T (&matrix)[N_ROW * M_COL])
 {
 	std::ofstream file;
 	file.open(file_name);
 
 	if (file.is_open()) {
 
-		for (uint_t i = 0; i < N_ROW; i++) {
+		for (Uint_T i = 0; i < N_ROW; i++) {
 
-			for (uint_t j = 0; j < M_COL; j++) {
+			for (Uint_T j = 0; j < M_COL; j++) {
 				file << std::setprecision(precision) << std::scientific << matrix[i * M_COL + j];
 
 				if (j < M_COL - 1) {
