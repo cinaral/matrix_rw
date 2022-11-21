@@ -1,6 +1,6 @@
 #include "matrix_rw.hpp"
 
-using Uint_T = matrix_rw::Uint_T;
+using size_t = matrix_rw::size_t;
 using Real_T = matrix_rw::Real_T;
 
 //* setup
@@ -12,8 +12,8 @@ const std::string ref_dat_prefix = ref_dat_dir + "/" + test_name + "-";
 const std::string in_arr_fname = "in_arr.dat";
 const std::string out_arr_fname = "out_arr.dat";
 
-constexpr Uint_T n_dim = 150;
-constexpr Uint_T m_dim = 75;
+constexpr size_t n_dim = 150;
+constexpr size_t m_dim = 75;
 
 #ifdef __USE_SINGLE_PRECISION__
 constexpr Real_T error_thres = 1e-7;
@@ -37,7 +37,7 @@ main()
 	//* verify
 	Real_T max_error = 0.;
 
-	for (Uint_T i = 0; i < n_dim * m_dim; ++i) {
+	for (size_t i = 0; i < n_dim * m_dim; ++i) {
 		const Real_T error = std::abs(in_arr[i] - out_arr[i]);
 
 		if (error > max_error) {

@@ -24,19 +24,14 @@
  * SOFTWARE.
  */
 
-#ifndef TYPES_HPP_CINARAL_220924_0017
-#define TYPES_HPP_CINARAL_220924_0017
+#ifndef CONFIG_HPP_CINARAL_221121_1600
+#define CONFIG_HPP_CINARAL_221121_1600
 
-#include <cstddef>
+#include <string>
 
 namespace matrix_rw
 {
-using size_t = std::size_t;
-#ifdef __USE_SINGLE_PRECISION__
-using Real_T = float;
-#else
-using Real_T = double;
-#endif
+constexpr std::string_view delimiter = ",";
 } // namespace matrix_rw
 
 #endif
