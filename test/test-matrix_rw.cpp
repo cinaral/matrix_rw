@@ -1,16 +1,9 @@
-#include "matrix_rw.hpp"
-
-using size_t = matrix_rw::size_t;
-using Real_T = matrix_rw::Real_T;
+#include "test_config.hpp"
 
 //* setup
-const std::string dat_dir = "../dat";
-const std::string ref_dat_dir = "../../test/reference_dat";
 const std::string test_name = "test-matrix_rw";
-const std::string dat_prefix = dat_dir + "/" + test_name + "-";
-const std::string ref_dat_prefix = ref_dat_dir + "/" + test_name + "-";
-const std::string in_arr_fname = "in_arr.dat";
-const std::string out_arr_fname = "out_arr.dat";
+const std::string dat_prefix = test_config::dat_dir + "/" + test_name + "-";
+const std::string ref_dat_prefix = test_config::ref_dat_dir + "/" + test_name + "-";
 
 constexpr size_t n_dim = 150;
 constexpr size_t m_dim = 75;
@@ -26,13 +19,13 @@ main()
 {
 	//* read reference data
 	Real_T in_arr[n_dim * m_dim];
-	matrix_rw::read<n_dim, m_dim>(ref_dat_prefix + in_arr_fname, in_arr);
+	matrix_rw::read<n_dim, m_dim>(ref_dat_prefix + test_config::in_arr_fname, in_arr);
 
 	//* test
-	matrix_rw::write<n_dim, m_dim>(dat_prefix + out_arr_fname, in_arr);
+	matrix_rw::write<n_dim, m_dim>(dat_prefix + test_config::out_arr_fname, in_arr);
 
 	Real_T out_arr[n_dim * m_dim];
-	matrix_rw::read<n_dim, m_dim>(dat_prefix + out_arr_fname, out_arr);
+	matrix_rw::read<n_dim, m_dim>(dat_prefix + test_config::out_arr_fname, out_arr);
 
 	//* verify
 	Real_T max_error = 0.;

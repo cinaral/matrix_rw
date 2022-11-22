@@ -58,19 +58,20 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
 		foreach(ELEMENT ${TEST_NAMES})
 			add_executable(
-				${ELEMENT} 
+				${ELEMENT}-test 
 				${TEST_DIR}/${ELEMENT}.cpp						
 			)
-
 			target_include_directories(
-				${ELEMENT} PRIVATE 
+				${ELEMENT}-test PRIVATE 
 				${INCLUDE_DIR}
 			)
-
 			add_test(
-				NAME ${ELEMENT} 
-				COMMAND ${ELEMENT}
+				NAME ${ELEMENT}-test 
+				COMMAND ${ELEMENT}-test
 				WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+			)
+			target_compile_options(
+				${ELEMENT}-test PRIVATE
 			)
 		endforeach(ELEMENT ${TEST_NAMES})
 	endif()
