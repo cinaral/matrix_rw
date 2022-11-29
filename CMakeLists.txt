@@ -87,7 +87,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	) 
 	add_custom_target(
 		src_package 
-		DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/-src.zip
+		DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/src.zip
 	)
 endif()
 
