@@ -7,9 +7,8 @@ Include the headers in ```include/``` into your project.
 
 Alternatively, you can use [FetchContent()](https://cmake.org/cmake/help/latest/module/FetchContent.html) in your ```CMakeLists.txt```:
 ```CMake
-FetchContent_Declare(matrix_rw URL https://github.com/cinaral/matrix_rw/releases/download/<RELEASE_TAG>/matrix_rw-src.zip)
+FetchContent_Declare(matrix_rw URL https://github.com/cinaral/matrix_rw/releases/download/<RELEASE_TAG>/src.zip)
 FetchContent_MakeAvailable(matrix_rw)
-set(matrix_rw_INCLUDE_DIR ${matrix_rw_SOURCE_DIR}/include)
 ```
 
 Use the MATLAB test and CTest to test the library before using. 
