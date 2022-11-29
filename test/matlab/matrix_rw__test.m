@@ -2,10 +2,10 @@
 bin_dir = '../../build/bin';
 dat_dir = '../../build/dat';
 ref_dat_dir = "../reference_dat";
-test_name = 'test-matrix_rw';
-dat_prefix = append(dat_dir, '/', test_name, '-');
-ref_dat_prefix = append(ref_dat_dir, '/', test_name, '-');
-exe_name = append(test_name, '.exe');
+test_name = 'matrix_rw';
+dat_prefix = append(dat_dir, '/', test_name, '-test-');
+ref_dat_prefix = append(ref_dat_dir, '/', test_name, '-test-');
+exe_name = append(test_name, '-test.exe');
 in_arr_fname = 'in_arr.dat';
 out_arr_fname = 'out_arr.dat';
 

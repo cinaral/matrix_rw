@@ -1,9 +1,9 @@
 #include "test_config.hpp"
 
 //* setup
-const std::string test_name = "test-matrix_rw";
-const std::string dat_prefix = test_config::dat_dir + "/" + test_name + "-";
-const std::string ref_dat_prefix = test_config::ref_dat_dir + "/" + test_name + "-";
+const std::string test_name = "matrix_rw";
+const std::string dat_prefix = test_config::dat_dir + "/" + test_name + "-test-";
+const std::string ref_dat_prefix = test_config::ref_dat_dir + "/" + test_name + "-test-";
 
 constexpr size_t n_dim = 150;
 constexpr size_t m_dim = 75;
