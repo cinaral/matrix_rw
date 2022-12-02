@@ -9,8 +9,9 @@ project(
 
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-	option(SINGLE_PRECISION "Single precision" OFF)
+	option(DEBUG_BUILD "Build everything in debug mode" ON)
 	option(BUILD_TESTS "Build tests" ON)
+	option(SINGLE_PRECISION "Single precision" OFF)
 	
 	#* where to look for the project header and source files
 	set(INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
@@ -18,7 +19,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
 	#* tests, examples, benchmarks to compile
 	set(TEST_NAMES
-		matrix_rw
+		matrix_rw-test
 	)
 
 	#* files to package
@@ -46,6 +47,17 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 		-Wpedantic #* more warnings
 	)
 	
+	if(DEBUG_BUILD)
+		add_compile_options(
+			-g #* debug symbols
+			-Og #* debug optimization
+		)
+	else()
+		add_compile_options(
+			-O3 #* release optimization
+		)
+	endif()
+	
 	if(SINGLE_PRECISION)
 		add_compile_options(-D__USE_SINGLE_PRECISION__) #* use single precision floats
 	endif()
@@ -58,20 +70,20 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
 		foreach(ELEMENT ${TEST_NAMES})
 			add_executable(
-				${ELEMENT}-test 
+				${ELEMENT} 
 				${TEST_DIR}/${ELEMENT}.cpp						
 			)
 			target_include_directories(
-				${ELEMENT}-test PRIVATE 
+				${ELEMENT} PRIVATE 
 				${INCLUDE_DIR}
 			)
-			add_test(
-				NAME ${ELEMENT}-test 
-				COMMAND ${ELEMENT}-test
-				WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-			)
 			target_compile_options(
-				${ELEMENT}-test PRIVATE
+				${ELEMENT} PRIVATE
+			)
+			add_test(
+				NAME ${ELEMENT} 
+				COMMAND ${ELEMENT}
+				WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 			)
 		endforeach(ELEMENT ${TEST_NAMES})
 	endif()
