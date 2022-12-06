@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2022 cinaral
+ * Copyright (c) 2022 Cinar, A. L.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -67,7 +67,6 @@ write(const std::string file_name, const Real_T (&matrix)[N_ROW * M_COL])
 	}
 	file.close();
 }
-
 } // namespace matrix_rw
 
 #endif
