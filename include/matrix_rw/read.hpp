@@ -56,13 +56,13 @@ read(const std::string file_name, Real_T (&matrix)[N_ROW * M_COL])
 					if ((str_pos = line.find(delimiter)) != std::string::npos) {
 						entry = line.substr(0, str_pos);
 						line.erase(0, str_pos + delimiter.length());
-#ifdef __USE_SINGLE_PRECISION__
+#ifdef USE_SINGLE_PRECISION
 						matrix[i * M_COL + j] = std::stof(entry);
 #else
 						matrix[i * M_COL + j] = std::stod(entry);
 #endif
 					} else {
-#ifdef __USE_SINGLE_PRECISION__
+#ifdef USE_SINGLE_PRECISION
 						matrix[i * M_COL + j] = std::stof(line);
 #else
 						matrix[i * M_COL + j] = std::stod(line);

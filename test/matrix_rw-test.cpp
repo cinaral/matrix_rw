@@ -8,7 +8,7 @@ const std::string ref_dat_prefix = test_config::ref_dat_dir + "/" + test_name + 
 constexpr size_t n_dim = 150;
 constexpr size_t m_dim = 75;
 
-#ifdef __USE_SINGLE_PRECISION__
+#ifdef USE_SINGLE_PRECISION
 constexpr Real_T error_thres = 1e-7;
 #else
 constexpr Real_T error_thres = 1e-15;
