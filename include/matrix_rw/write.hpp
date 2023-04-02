@@ -27,21 +27,55 @@
 #ifndef WRITE_HPP_CINARAL_220924_0019
 #define WRITE_HPP_CINARAL_220924_0019
 
-#include "config.hpp"
 #include "types.hpp"
+#include <array>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <string>
+#include <vector>
 
 namespace matrix_rw
 {
-const size_t precision = std::numeric_limits<Real_T>::digits10 + 1;
+constexpr size_t precision = std::numeric_limits<Real_T>::digits10 + 1;
+
+template <size_t M_COL>
+void
+write(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matrix,
+      std::string_view delimiter = ",")
+{
+	std::ofstream file;
+	file.open(file_name);
+	const size_t n_row = matrix.size();
+
+	if (file.is_open()) {
+
+		for (size_t i = 0; i < n_row; i++) {
+
+			for (size_t j = 0; j < M_COL; j++) {
+				file << std::setprecision(precision) << std::scientific
+				     << matrix[i][j];
+
+				if (j < M_COL - 1) {
+					file << delimiter;
+				}
+			}
+
+			if (i < n_row) {
+				file << std::endl;
+			}
+		}
+	} else {
+		std::cerr << "Could not open file " << file_name << std::endl;
+	}
+	file.close();
+}
 
 template <size_t N_ROW, size_t M_COL>
 void
-write(const std::string file_name, const Real_T (&matrix)[N_ROW * M_COL])
+write(const std::string file_name, const Real_T (&matrix)[N_ROW][M_COL],
+      std::string_view delimiter = ",")
 {
 	std::ofstream file;
 	file.open(file_name);
@@ -51,7 +85,8 @@ write(const std::string file_name, const Real_T (&matrix)[N_ROW * M_COL])
 		for (size_t i = 0; i < N_ROW; i++) {
 
 			for (size_t j = 0; j < M_COL; j++) {
-				file << std::setprecision(precision) << std::scientific << matrix[i * M_COL + j];
+				file << std::setprecision(precision) << std::scientific
+				     << matrix[i][j];
 
 				if (j < M_COL - 1) {
 					file << delimiter;

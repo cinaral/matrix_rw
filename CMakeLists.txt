@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 project(
 	matrix_rw
-	VERSION 1.0.5 
+	VERSION 1.0.6
 	LANGUAGES CXX
 )
 
@@ -11,15 +11,24 @@ project(
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	option(DEBUG_BUILD "Build everything in debug mode" ON)
 	option(BUILD_TESTS "Build tests" ON)
+	option(BUILD_EXAMPLES "Build examples" ON)
 	option(SINGLE_PRECISION "Single precision" OFF)
 	
 	#* where to look for the project header and source files
 	set(INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
 	set(TEST_DIR ${CMAKE_CURRENT_LIST_DIR}/test)
+	set(EXAMPLE_DIR ${CMAKE_CURRENT_LIST_DIR}/examples)
+	set(BENCHMARK_DIR ${CMAKE_CURRENT_LIST_DIR}/benchmarks)
 
 	#* tests, examples, benchmarks to compile
 	set(TEST_NAMES
 		matrix_rw-test
+	)
+	set(EXAMPLE_NAMES
+		read_example
+		write_example
+	)
+	set(BENCHMARK_NAMES
 	)
 
 	#* files to package
@@ -33,6 +42,8 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	#* set up directories for binary, library, data and parameter files 
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 	file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dat)
+
+
 
 	#* project compile options
 	set(CMAKE_CXX_STANDARD 17)
@@ -86,6 +97,47 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 				WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 			)
 		endforeach(ELEMENT ${TEST_NAMES})
+	endif()
+
+	#************#
+	#* Examples *#
+	#************#
+	if(BUILD_EXAMPLES)
+		foreach(ELEMENT ${EXAMPLE_NAMES})
+			add_executable(
+				${ELEMENT}
+				${EXAMPLE_DIR}/${ELEMENT}.cpp						
+			)
+			target_include_directories(
+				${ELEMENT} PRIVATE 
+				${INCLUDE_DIR}
+			)
+			target_compile_options(
+				${ELEMENT} PRIVATE
+			)
+		endforeach(ELEMENT ${EXAMPLE_NAMES})
+	endif()
+
+	#*************#
+	#* Benchmark *#
+	#*************#
+	if(BUILD_BENCHMARKS)
+		foreach(ELEMENT ${BENCHMARK_NAMES})
+			add_executable(
+				${ELEMENT}
+				${BENCHMARK_DIR}/${ELEMENT}.cpp
+			)
+			target_include_directories(
+				${ELEMENT} PRIVATE 
+				${INCLUDE_DIR}	
+			)
+			target_compile_options(
+				${ELEMENT} PRIVATE
+				-O3 #* optimization level, alternative: -Ofast (turns on ffast-math etc.)
+				-m64 #* x64
+				-mavx2 #* enable avx2
+			)
+		endforeach(ELEMENT ${BENCHMARK_NAMES})
 	endif()
 
 	#************************#
