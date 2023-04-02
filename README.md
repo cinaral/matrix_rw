@@ -1,5 +1,5 @@
 # matrix_rw
-Simple header-only C++ library to write/read matrices to/from files. This library is used for testing and verification using MATLAB in my other projects.
+Simple header-only C++ library to write/read matrices to/from files, basically a .csv reader. This library is used for testing and verification using MATLAB in my other projects.
 
 # Installation
 
@@ -10,21 +10,32 @@ Alternatively, you can use [FetchContent()](https://cmake.org/cmake/help/latest/
 FetchContent_Declare(matrix_rw URL https://github.com/cinaral/matrix_rw/releases/download/<RELEASE_TAG>/src.zip)
 FetchContent_MakeAvailable(matrix_rw)
 ```
-
 Use the MATLAB test and CTest to test the library before using. 
-
-**WARNING:** Running the MATLAB test is required since this library's intended use case is interfacing with MATLAB functions.
 
 # Usage:
 
 ## Read:
 ```Cpp
+/** if you know both the row and column size */
+Real_T matrix[n_dim][m_dim];
 matrix_rw::read<n_dim, m_dim>(file, matrix);
+
+/** if you only know the column size */
+std::vector<std::array<Real_T, m_dim>> matrix;
+matrix_rw::read<m_dim>(file, matrix);
 ```
 
 ## Write:
 ```Cpp
+/** if you know both the row and column size */
+Real_T matrix[n_dim][m_dim];
+// ...
 matrix_rw::write<n_dim, m_dim>(file, matrix);
+
+/** if you only know the column size */
+std::vector<std::array<Real_T, m_dim>> matrix;
+// ...
+matrix_rw::write<m_dim>(file, matrix);
 ```
 
 See the [test](./test/test-matrix_rw.cpp) for an example.
