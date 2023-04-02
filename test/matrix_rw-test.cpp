@@ -29,13 +29,13 @@ main()
 
 		/** read reference data */
 		Real_T in_arr[n_dim][m_dim];
-		matrix_rw::read<n_dim, m_dim>(ref_dat_prefix + in_arr_fname, in_arr);
+		matrix_rw::read(ref_dat_prefix + in_arr_fname, in_arr);
 
 		/** test */
-		matrix_rw::write<n_dim, m_dim>(dat_prefix + out_arr_fname, in_arr);
+		matrix_rw::write(dat_prefix + out_arr_fname, in_arr);
 
 		Real_T out_arr[n_dim][m_dim];
-		matrix_rw::read<n_dim, m_dim>(dat_prefix + out_arr_fname, out_arr);
+		matrix_rw::read(dat_prefix + out_arr_fname, out_arr);
 
 		/** verify */
 		for (size_t i = 0; i < n_dim; ++i) {
@@ -54,13 +54,14 @@ main()
 
 		/** read reference data */
 		std::vector<std::array<Real_T, m_dim>> in_arr;
-		matrix_rw::read<m_dim>(ref_dat_prefix + in_arr_fname, in_arr);
+		matrix_rw::read(ref_dat_prefix + in_arr_fname, in_arr);
 
 		/** test */
-		matrix_rw::write<m_dim>(dat_prefix + out_arr_fname, in_arr);
+		matrix_rw::write(dat_prefix + out_arr_fname, in_arr);
 
 		std::vector<std::array<Real_T, m_dim>> out_arr;
-		matrix_rw::read<m_dim>(dat_prefix + out_arr_fname, out_arr);
+		matrix_rw::read(dat_prefix + out_arr_fname, out_arr);
+		const size_t n_dim = out_arr.size();
 
 		/** verify */
 		for (size_t i = 0; i < n_dim; ++i) {

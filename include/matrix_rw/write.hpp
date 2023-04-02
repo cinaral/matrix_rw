@@ -40,6 +40,9 @@ namespace matrix_rw
 {
 constexpr size_t precision = std::numeric_limits<Real_T>::digits10 + 1;
 
+/* `write<OPT:M_COL>(file_name, matrix, OPT:delimiter)`:
+ * Write a variable row size matrix to a file
+ */
 template <size_t M_COL>
 void
 write(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matrix,
@@ -72,6 +75,9 @@ write(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matr
 	file.close();
 }
 
+/* `write<OPT:N_ROW, M_COL>(file_name, matrix, OPT:delimiter)`:
+ * Write a known size matrix to a file
+ */
 template <size_t N_ROW, size_t M_COL>
 void
 write(const std::string file_name, const Real_T (&matrix)[N_ROW][M_COL],

@@ -17,7 +17,7 @@ main()
 		constexpr size_t n_dim = 3;
 		constexpr size_t m_dim = 3;
 		Real_T matrix[n_dim][m_dim];
-		matrix_rw::read<n_dim, m_dim>(file1_path, matrix); /** read from file */
+		matrix_rw::read(file1_path, matrix); /** read from file */
 
 		for (size_t i = 0; i < n_dim; ++i) {
 			for (size_t j = 0; j < m_dim; ++j) {
@@ -31,7 +31,7 @@ main()
 		/** if you only know the column size */
 		constexpr size_t m_dim = 3;
 		std::vector<std::array<Real_T, m_dim>> matrix;
-		matrix_rw::read<m_dim>(file2_path, matrix); /** read from file */
+		matrix_rw::read(file2_path, matrix); /** read from file */
 		size_t n_dim = matrix.size();
 
 		for (size_t i = 0; i < n_dim; ++i) {

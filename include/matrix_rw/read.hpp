@@ -36,6 +36,9 @@
 
 namespace matrix_rw
 {
+/* `read<OPT:M_COL>(file_name, matrix, OPT:delimiter)`:
+ * Read a variable row size matrix from a file
+ */
 template <size_t M_COL>
 void
 read(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matrix,
@@ -78,6 +81,9 @@ read(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matri
 	file.close();
 }
 
+/* `read<OPT:N_ROW, M_COL>(file_name, matrix, OPT:delimiter)`:
+ * Read a known size matrix from a file
+ */
 template <size_t N_ROW, size_t M_COL>
 void
 read(const std::string file_name, Real_T (&matrix)[N_ROW][M_COL], std::string_view delimiter = ",")

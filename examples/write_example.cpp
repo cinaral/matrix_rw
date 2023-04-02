@@ -23,7 +23,7 @@ main()
 				matrix[i][j] = i * m_dim + j;
 			}
 		}
-		matrix_rw::write<n_dim, m_dim>(file1_path, matrix); /** write to file */
+		matrix_rw::write(file1_path, matrix); /** write to file */
 	}
 	{
 		/** if you only know the column size */
@@ -37,7 +37,7 @@ main()
 			}
 			matrix.push_back(row);
 		}
-		matrix_rw::write<m_dim>(file2_path, matrix); /** write to file */
+		matrix_rw::write(file2_path, matrix); /** write to file */
 	}
 
 	return 0;
