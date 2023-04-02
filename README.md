@@ -18,11 +18,11 @@ Use the MATLAB test and CTest to test the library before using.
 ```Cpp
 /** if you know both the row and column size */
 Real_T matrix[n_dim][m_dim];
-matrix_rw::read<n_dim, m_dim>(file, matrix);
+matrix_rw::read(file, matrix);
 
 /** if you only know the column size */
 std::vector<std::array<Real_T, m_dim>> matrix;
-matrix_rw::read<m_dim>(file, matrix);
+matrix_rw::read(file, matrix);
 ```
 
 ## Write:
@@ -30,12 +30,12 @@ matrix_rw::read<m_dim>(file, matrix);
 /** if you know both the row and column size */
 Real_T matrix[n_dim][m_dim];
 // ...
-matrix_rw::write<n_dim, m_dim>(file, matrix);
+matrix_rw::write(file, matrix);
 
 /** if you only know the column size */
 std::vector<std::array<Real_T, m_dim>> matrix;
 // ...
-matrix_rw::write<m_dim>(file, matrix);
+matrix_rw::write(file, matrix);
 ```
 
 See the [test](./test/test-matrix_rw.cpp) for an example.
