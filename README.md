@@ -45,3 +45,6 @@ The input and output files are comma and newline delimited, and their extension 
 writematrix(matrix, file, 'Delimiter', ',');  
 matrix = readmatrix(file);  
 ```
+
+# To do:
+- 1D array rw
