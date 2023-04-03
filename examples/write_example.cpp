@@ -1,44 +1,32 @@
 #include "matrix_rw.hpp"
-#include <string>
-#include <vector>
 
 using matrix_rw::Real_T;
+using matrix_rw::Row_T;
 using matrix_rw::size_t;
+using matrix_rw::VarRowMat_T;
 
 /** relative to the directory of the executable */
-const std::string file1_path = "../dat/write_example-1.csv";
-const std::string file2_path = "../dat/write_example-2.csv";
+constexpr size_t m_col = 3;
+constexpr size_t n_row = 3;
+const std::string fprefix = "../data/";
+const std::string fname = "write_example.csv";
 
 int
 main()
 {
-	{
-		/** if you know both the row and column size */
-		constexpr size_t n_dim = 3;
-		constexpr size_t m_dim = 3;
-		Real_T matrix[n_dim][m_dim];
+	VarRowMat_T<m_col> mat;
+	mat.reserve(n_row);
+	Row_T<m_col> row;
 
-		for (size_t i = 0; i < n_dim; ++i) {
-			for (size_t j = 0; j < m_dim; ++j) {
-				matrix[i][j] = i * m_dim + j;
-			}
+	/** fill the matrix */
+	for (size_t i = 0; i < n_row; ++i) {
+		for (size_t j = 0; j < m_col; ++j) {
+			row[j] = i * m_col + j;
 		}
-		matrix_rw::write(file1_path, matrix); /** write to file */
+		mat.push_back(row);
 	}
-	{
-		/** if you only know the column size */
-		constexpr size_t m_dim = 3;
-		std::vector<std::array<Real_T, m_dim>> matrix;
-		std::array<Real_T, m_dim> row;
-
-		for (size_t i = 0; i < 5; ++i) {
-			for (size_t j = 0; j < m_dim; ++j) {
-				row[j] = i * m_dim + j;
-			}
-			matrix.push_back(row);
-		}
-		matrix_rw::write(file2_path, matrix); /** write to file */
-	}
+	matrix_rw::Writer<m_col> writematrix;
+	writematrix(fprefix + fname, mat); /** write to file */
 
 	return 0;
 }

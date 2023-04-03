@@ -28,86 +28,53 @@
 #define WRITE_HPP_CINARAL_220924_0019
 
 #include "types.hpp"
-#include <array>
 #include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <limits>
+#include <iomanip> /** std::setprecision */
+#include <limits>  /** std::numeric_limits */
 #include <string>
-#include <vector>
 
 namespace matrix_rw
 {
-constexpr size_t precision = std::numeric_limits<Real_T>::digits10 + 1;
-
-/* `write<OPT:M_COL>(file_name, matrix, OPT:delimiter)`:
- * Write a variable row size matrix to a file
- */
-template <size_t M_COL>
-void
-write(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matrix,
-      std::string_view delimiter = ",")
+template <size_t M_COL> class Writer
 {
-	std::ofstream file;
-	file.open(file_name);
-	const size_t n_row = matrix.size();
+  public:
+	Writer(std::string_view delimiter = ",") : delimiter(delimiter){};
+	~Writer(){};
 
-	if (file.is_open()) {
+	void
+	operator()(const std::string &file_name, VarRowMat_T<M_COL> &mat)
+	{
+		std::ofstream file;
+		file.open(file_name);
+
+		if (!file.is_open()) {
+			printf("Could not open file: %s", file_name.c_str());
+			return;
+		}
+		const size_t n_row = mat.size();
+		/** set write precision */
+		file << std::setprecision(std::numeric_limits<Real_T>::digits10 + 1);
 
 		for (size_t i = 0; i < n_row; i++) {
-
 			for (size_t j = 0; j < M_COL; j++) {
-				file << std::setprecision(precision) << std::scientific
-				     << matrix[i][j];
+				file << std::scientific << mat[i][j];
 
 				if (j < M_COL - 1) {
 					file << delimiter;
 				}
 			}
 
+			/** add newline except for the last line */
 			if (i < n_row) {
 				file << std::endl;
 			}
 		}
-	} else {
-		std::cerr << "Could not open file " << file_name << std::endl;
+		file.close();
 	}
-	file.close();
-}
 
-/* `write<OPT:N_ROW, M_COL>(file_name, matrix, OPT:delimiter)`:
- * Write a known size matrix to a file
- */
-template <size_t N_ROW, size_t M_COL>
-void
-write(const std::string file_name, const Real_T (&matrix)[N_ROW][M_COL],
-      std::string_view delimiter = ",")
-{
-	std::ofstream file;
-	file.open(file_name);
-
-	if (file.is_open()) {
-
-		for (size_t i = 0; i < N_ROW; i++) {
-
-			for (size_t j = 0; j < M_COL; j++) {
-				file << std::setprecision(precision) << std::scientific
-				     << matrix[i][j];
-
-				if (j < M_COL - 1) {
-					file << delimiter;
-				}
-			}
-
-			if (i < N_ROW) {
-				file << std::endl;
-			}
-		}
-	} else {
-		std::cerr << "Could not open file " << file_name << std::endl;
-	}
-	file.close();
-}
+  private:
+	const std::string_view delimiter;
+};
 } // namespace matrix_rw
 
 #endif

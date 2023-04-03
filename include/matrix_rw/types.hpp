@@ -27,7 +27,9 @@
 #ifndef TYPES_HPP_CINARAL_220924_0017
 #define TYPES_HPP_CINARAL_220924_0017
 
+#include <array>
 #include <cstddef>
+#include <vector>
 
 namespace matrix_rw
 {
@@ -37,6 +39,10 @@ using Real_T = float;
 #else
 using Real_T = double;
 #endif
+
+template <size_t M_COL> using Row_T = std::array<Real_T, M_COL>;
+template <size_t M_COL> using VarRowMat_T = std::vector<Row_T<M_COL>>;
+
 } // namespace matrix_rw
 
 #endif

@@ -28,67 +28,74 @@
 #define READ_HPP_CINARAL_220924_0017
 
 #include "types.hpp"
-#include <array>
+
+#include <cstdio>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
 
 namespace matrix_rw
 {
-/* `read<OPT:M_COL>(file_name, matrix, OPT:delimiter)`:
- * Read a variable row size matrix from a file
- */
-template <size_t M_COL>
-void
-read(const std::string &file_name, std::vector<std::array<Real_T, M_COL>> &matrix,
-     std::string_view delimiter = ",")
+template <size_t M_COL> class Reader
 {
-	std::ifstream file;
-	file.open(file_name);
+  public:
+	Reader(std::string_view delimiter = ",") : delimiter(delimiter){};
+	~Reader(){};
 
-	if (file.is_open()) {
+	void
+	operator()(const std::string &file_name, VarRowMat_T<M_COL> &matrix)
+	{
+		std::ifstream file;
+		file.open(file_name);
+
+		if (!file.is_open()) {
+			printf("Could not open file: %s", file_name.c_str());
+			return;
+		}
 		std::string line;
-		//std::string entry;
-		//size_t str_pos = 0;
-		std::array<Real_T, M_COL> row;
+		Row_T<M_COL> row;
 
 		while (std::getline(file, line)) {
-			read_line(line, row, delimiter);
+			if (line.empty()) {
+				continue;
+			}
+			parse(line, row);
 			matrix.push_back(row);
 		}
-	} else {
-		std::cerr << "Could not open file " << file_name << std::endl;
+		file.close();
 	}
-	file.close();
-}
 
-template <size_t M_DIM>
-void
-read_line(std::string &line, std::array<Real_T, M_DIM> &row, std::string_view delimiter = ",")
-{
-	/** parse the line by splitting at the delimiters */
-	for (size_t i = 0; i < M_DIM; i++) {
-		const size_t str_pos = line.find(delimiter);
+  private:
+	void
+	parse(std::string &line, Row_T<M_COL> &row)
+	{
+		/** parse the line by splitting at the delimiters */
+		for (size_t i = 0; i < M_COL; i++) {
+			const size_t str_pos = line.find(delimiter);
 
-		if (str_pos != std::string::npos) {
-			/** an */
-			const std::string item = line.substr(0, str_pos);
-			line.erase(0, str_pos + delimiter.length());
+			if (str_pos != std::string::npos) {
+				/** an */
+				item = line.substr(0, str_pos);
+				line.erase(0, str_pos + delimiter.length());
 #ifdef USE_SINGLE_PRECISION
-			row[i] = std::stof(item);
+				row[i] = std::stof(item);
 #else
-			row[i] = std::stod(item);
+				row[i] = std::stod(item);
 #endif
-		} else { /** the last entry does not have the delimiter after it */
+			} else { /** the last entry does not have the delimiter after it */
 #ifdef USE_SINGLE_PRECISION
-			row[i] = std::stof(line);
+				row[i] = std::stof(line);
 #else
-			row[i] = std::stod(line);
+				row[i] = std::stod(line);
 #endif
+			}
 		}
 	}
-}
+
+  private:
+	std::string item;
+	const std::string_view delimiter;
+};
 
 } // namespace matrix_rw
 
