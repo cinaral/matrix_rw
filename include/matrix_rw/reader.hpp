@@ -65,7 +65,6 @@ template <Size M_COL> class Reader
 	}
 
   private:
-
 	void
 	parse_row(std::string &line, Row_T<M_COL> &row)
 	{
