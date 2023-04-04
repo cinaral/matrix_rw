@@ -29,20 +29,17 @@
 
 #include <array>
 #include <cstddef>
-#include <vector>
 
 namespace matrix_rw
 {
-using size_t = std::size_t;
+using Size = std::size_t;
 #ifdef USE_SINGLE_PRECISION
-using Real_T = float;
+using Real = float;
 #else
-using Real_T = double;
+using Real = double;
 #endif
 
-template <size_t M_COL> using Row_T = std::array<Real_T, M_COL>;
-template <size_t M_COL> using VarRowMat_T = std::vector<Row_T<M_COL>>;
-
+template <Size M_COL> using Row_T = std::array<Real, M_COL>;
 } // namespace matrix_rw
 
 #endif

@@ -1,8 +1,8 @@
 # `matrix_rw`: Matrix Read/Write
 This is a simple header-only C++ library to read/write .csv files to read/write matrices from/to file. It is indended to be used for variable row size matrices represented using:
 ```Cpp
-template <size_t M_COL> using Row_T = std::array<Real_T, M_COL>;
-template <size_t M_COL> using VarRowMat_T = std::vector<Row_T<M_COL>>;
+template <Size M_COL> using Row_T = std::array<Real, M_COL>;
+template <Size M_COL> using std::vector<Row_T<M_COL>> = std::vector<Row_T<M_COL>>;
 ```
 
 # Installation
@@ -20,13 +20,13 @@ FetchContent_MakeAvailable(matrix_rw)
 ## Read:
 ```Cpp
 Reader<m_col> readmatrix;
-VarRowMat_T<m_col> mat;
+std::vector<Row_T<m_col>> mat;
 readmatrix(file_path, mat); /** read from file */
 ```
 
 ## Write:
 ```Cpp
-VarRowMat_T<m_col> mat;
+std::vector<Row_T<m_col>> mat;
 //...
 Writer<m_col> writematrix;
 writematrix(file_path, mat); /** write to file */

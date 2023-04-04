@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 project(
 	matrix_rw
-	VERSION 1.2.0
+	VERSION 1.2.1
 	LANGUAGES CXX
 )
 
@@ -21,7 +21,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
 	#* tests, examples, benchmarks to compile
 	set(TEST_NAMES
-		matrix_rw-test
+		rw_test
 	)
 	set(EXAMPLE_NAMES
 		read_example

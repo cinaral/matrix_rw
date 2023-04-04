@@ -32,17 +32,18 @@
 #include <iomanip> /** std::setprecision */
 #include <limits>  /** std::numeric_limits */
 #include <string>
+#include <vector>
 
 namespace matrix_rw
 {
-template <size_t M_COL> class Writer
+template <Size M_COL> class Writer
 {
   public:
 	Writer(std::string_view delimiter = ",") : delimiter(delimiter){};
 	~Writer(){};
 
 	void
-	operator()(const std::string &file_name, VarRowMat_T<M_COL> &mat)
+	operator()(const std::string &file_name, std::vector<Row_T<M_COL>> &matrix)
 	{
 		std::ofstream file;
 		file.open(file_name);
@@ -51,13 +52,13 @@ template <size_t M_COL> class Writer
 			printf("Could not open file: %s", file_name.c_str());
 			return;
 		}
-		const size_t n_row = mat.size();
+		const Size n_row = matrix.size();
 		/** set write precision */
-		file << std::setprecision(std::numeric_limits<Real_T>::digits10 + 1);
+		file << std::setprecision(std::numeric_limits<Real>::digits10 + 1);
 
-		for (size_t i = 0; i < n_row; i++) {
-			for (size_t j = 0; j < M_COL; j++) {
-				file << std::scientific << mat[i][j];
+		for (Size i = 0; i < n_row; i++) {
+			for (Size j = 0; j < M_COL; j++) {
+				file << std::scientific << matrix[i][j];
 
 				if (j < M_COL - 1) {
 					file << delimiter;
