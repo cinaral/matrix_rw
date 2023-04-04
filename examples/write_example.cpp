@@ -1,7 +1,7 @@
 #include "matrix_rw.hpp"
 
 using matrix_rw::Real;
-using matrix_rw::Row_T;
+using matrix_rw::Row;
 using matrix_rw::Size;
 
 /** relative to the directory of the executable */
@@ -13,9 +13,9 @@ const std::string fname = "write_example.csv";
 int
 main()
 {
-	std::vector<Row_T<m_col>> mat;
+	std::vector<Row<m_col>> mat;
 	mat.reserve(n_row);
-	Row_T<m_col> row;
+	Row<m_col> row;
 
 	/** fill the matrix */
 	for (Size i = 0; i < n_row; ++i) {

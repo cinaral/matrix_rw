@@ -1,18 +1,18 @@
-%* setup
-bin_fprefix = '../../build/bin';
+%** setup *%
 test_name = 'rw_test';
+bin_fprefix = '../../build/bin';
 bin_fname = append(test_name, '.exe');
 ref_fprefix = append('../ref_data/', test_name, '-');
-ref_mat_fname = 'ref_matrix.csv';
+mat_fname = 'matrix.csv';
 m_col = 75;
 
-%* create reference data 
+%** create reference data *%
 magic_mat = magic(m_col);
 ref_mat = [magic_mat; magic_mat]./max(magic_mat, [], 'all') - 1/3;
-writematrix(ref_mat, append(ref_fprefix, ref_mat_fname), 'Delimiter', ',');
+writematrix(ref_mat, append(ref_fprefix, mat_fname), 'Delimiter', ',');
 disp(append('Created reference data for ', test_name));
 
-%* call the test executable
+%** call the test binary *%
 prev_pwd = pwd;
 cd(bin_fprefix);
 

@@ -43,7 +43,7 @@ template <Size M_COL> class Writer
 	~Writer(){};
 
 	void
-	operator()(const std::string &file_name, std::vector<Row_T<M_COL>> &matrix)
+	operator()(const std::string &file_name, std::vector<Row<M_COL>> &matrix)
 	{
 		std::ofstream file;
 		file.open(file_name);

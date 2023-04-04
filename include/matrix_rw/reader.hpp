@@ -43,7 +43,7 @@ template <Size M_COL> class Reader
 	~Reader(){};
 
 	void
-	operator()(const std::string &file_name, std::vector<Row_T<M_COL>> &matrix)
+	operator()(const std::string &file_name, std::vector<Row<M_COL>> &matrix)
 	{
 		std::ifstream file;
 		file.open(file_name);
@@ -52,7 +52,7 @@ template <Size M_COL> class Reader
 			printf("Could not open file: %s", file_name.c_str());
 			return;
 		}
-		Row_T<M_COL> row;
+		Row<M_COL> row;
 
 		while (std::getline(file, line)) {
 			if (line.empty()) {
@@ -66,7 +66,7 @@ template <Size M_COL> class Reader
 
   private:
 	void
-	parse_row(std::string &line, Row_T<M_COL> &row)
+	parse_row(std::string &line, Row<M_COL> &row)
 	{
 		/** parse the line by splitting at the delimiters */
 		for (Size i = 0; i < M_COL; i++) {

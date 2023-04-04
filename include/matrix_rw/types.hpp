@@ -39,7 +39,7 @@ using Real = float;
 using Real = double;
 #endif
 
-template <Size M_COL> using Row_T = std::array<Real, M_COL>;
+template <Size M_COL> using Row = std::array<Real, M_COL>;
 } // namespace matrix_rw
 
 #endif

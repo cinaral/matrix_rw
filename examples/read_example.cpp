@@ -1,6 +1,6 @@
 #include "matrix_rw.hpp"
 using matrix_rw::Real;
-using matrix_rw::Row_T;
+using matrix_rw::Row;
 using matrix_rw::Size;
 
 constexpr Size m_col = 3;
@@ -12,7 +12,7 @@ int
 main()
 {
 	matrix_rw::Reader<m_col> readmatrix;
-	std::vector<Row_T<m_col>> mat;
+	std::vector<Row<m_col>> mat;
 	readmatrix(fprefix + fname, mat); /** read from file */
 	const Size n_dim = mat.size();    /** determine size */
 
